@@ -9,13 +9,19 @@ class CategoryItem extends React.Component {
     super(props);
     this.state = {
       category: this.props.category,
+      editmode: false,
     };
 
     this.handleDelete = this.handleDelete.bind(this);
+    this.handleEditMode = this.handleEditMode.bind(this);
   }
 
   handleDelete() {
     this.props.categoryItemDelete(this.state.category);
+  }
+
+  handleEditMode() {
+    this.setState({ editmode: !this.state.editmode });
   }
 
   render() {
@@ -24,6 +30,14 @@ class CategoryItem extends React.Component {
         <h4>Category: {this.props.category.name}</h4>
         <p>Budget: {this.props.category.budget}</p>
         <button onClick={this.handleDelete}>Delete</button>
+        <button onClick={this.handleEditMode}>Edit</button>
+        {renderIf(this.state.editmode,
+          <CategoryForm
+            category={this.props.category}
+            buttonText='Update'
+            onComplete={this.props.categoryItemUpdate}
+          />
+        )}
       </div>
     );
   }
@@ -35,6 +49,7 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = (dispatch, getState) => ({
   categoryItemDelete: category => dispatch(categoryDelete(category)),
+  categoryItemUpdate: category => dispatch(categoryUpdate(category)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(CategoryItem);
