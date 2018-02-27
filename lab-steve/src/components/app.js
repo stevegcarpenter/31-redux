@@ -20,7 +20,7 @@ class App extends React.Component {
           </BrowserRouter>
         </Provider>
       </main>
-    )
+    );
   }
 }
 
