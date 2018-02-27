@@ -2,6 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { categoryCreate } from '../../actions/category-actions';
 import CategoryForm from '../category/category-form/category-form';
+import CategoryItem from '../category/category-item/category-item';
 
 class Dashboard extends React.Component {
   render() {
@@ -16,10 +17,10 @@ class Dashboard extends React.Component {
 
         {this.props.categories
           ? this.props.categories.map(cat => (
-            <div key={cat._id}>
-              <h3>{cat.name}</h3>
-              <h4>{cat.budget}</h4>
-            </div>
+            <CategoryItem
+              key={cat._id}
+              category={cat}
+            />
           ))
           : undefined
         }
