@@ -6,7 +6,8 @@ class CategoryForm extends React.Component {
     this.state = this.props.category
       ? this.props.category
       : {
-        title: ''
+        name: '',
+        budget: '',
       };
 
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -27,8 +28,17 @@ class CategoryForm extends React.Component {
       <form className="category-form" onSubmit={this.handleSubmit}>
         <input
           type='text'
-          name='title'
-          value={this.state.title}
+          name='name'
+          placeholder='name'
+          value={this.state.name}
+          onChange={this.handleChange}
+        />
+
+        <input
+          type='number'
+          name='budget'
+          placeholder='budget'
+          value={this.state.budget}
           onChange={this.handleChange}
         />
 
