@@ -14,13 +14,13 @@ class Dashboard extends React.Component {
           onComplete={this.props.dashboardCategoryCreate}
         />
 
-        {this.props.categories ?
-          this.props.categories.map(cat =>
+        {this.props.categories
+          ? this.props.categories.map(cat => (
             <div key={cat._id}>
               <h3>{cat.title}</h3>
-            </div>)
-          :
-          undefined
+            </div>
+          ))
+          : undefined
         }
       </section>
     );
@@ -28,11 +28,11 @@ class Dashboard extends React.Component {
 }
 
 const mapStateToProps = state => ({
-  category: state,
+  categories: state
 });
 
 const mapDispatchToProps = (dispatch, getState) => ({
-  dashboardCategoryCreate: category => dispatch(categoryCreate(category)),
+  dashboardCategoryCreate: category => dispatch(categoryCreate(category))
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Dashboard);
